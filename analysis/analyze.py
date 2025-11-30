@@ -146,7 +146,7 @@ def main():
     """Main analysis pipeline."""
     # Setup paths
     tests_dir = Path(__file__).parent.parent / 'tests'
-    output_dir = Path(__file__).parent.parent / 'public' / 'data'
+    output_dir = Path(__file__).parent.parent / 'docs' / 'data'
     output_file = output_dir / 'analysis.json'
 
     # Analyze all books
