@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lewis Carroll: A Distant Reading</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">Lewis Carroll</h1>
+            <p class="subtitle">A Distant Reading of Four Works</p>
+            <div class="decorative-line">♠ ♥ ♣ ♦</div>
+        </header>
+
+        <!-- Main Layout -->
+        <div class="main-layout">
+            <!-- Sidebar Navigation -->
+            <aside class="sidebar">
+                <h2 class="sidebar-title">Select a Work</h2>
+                <nav class="book-nav" id="bookNav">
+                    <!-- Books will be loaded here -->
+                </nav>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-subtitle">Views</h3>
+                    <div class="view-buttons">
+                        <button class="view-btn active" data-view="overview">Overview</button>
+                        <button class="view-btn" data-view="wordcloud">Word Cloud</button>
+                        <button class="view-btn" data-view="comparison">Compare</button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="content">
+                <!-- Overview View -->
+                <section id="overview-view" class="view active">
+                    <div class="content-header">
+                        <h2 id="current-title">Select a book to begin</h2>
+                    </div>
+
+                    <div class="metrics-grid" id="metricsGrid">
+                        <!-- Metrics will be loaded here -->
+                    </div>
+
+                    <div class="sentiment-section">
+                        <h3>Sentiment Analysis</h3>
+                        <div id="sentimentDisplay" class="sentiment-display">
+                            <!-- Sentiment data will be loaded here -->
+                        </div>
+                    </div>
+
+                    <div class="top-words-section">
+                        <h3>Most Frequent Words</h3>
+                        <div id="topWords" class="top-words-grid">
+                            <!-- Top words will be loaded here -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Word Cloud View -->
+                <section id="wordcloud-view" class="view">
+                    <div class="content-header">
+                        <h2>Word Cloud</h2>
+                    </div>
+                    <div class="wordcloud-container">
+                        <canvas id="wordCloudCanvas"></canvas>
+                    </div>
+                </section>
+
+                <!-- Comparison View -->
+                <section id="comparison-view" class="view">
+                    <div class="content-header">
+                        <h2>Compare Works</h2>
+                    </div>
+
+                    <div class="comparison-controls">
+                        <label>
+                            <input type="checkbox" class="compare-checkbox" value="alice"> Alice in Wonderland
+                        </label>
+                        <label>
+                            <input type="checkbox" class="compare-checkbox" value="phantasmagoria"> Phantasmagoria
+                        </label>
+                        <label>
+                            <input type="checkbox" class="compare-checkbox" value="rhyme"> Rhyme and Reason
+                        </label>
+                        <label>
+                            <input type="checkbox" class="compare-checkbox" value="feeding"> Feeding the Mind
+                        </label>
+                    </div>
+
+                    <div id="comparisonDisplay" class="comparison-display">
+                        <!-- Comparison data will be loaded here -->
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Texts from Project Gutenberg • Analysis by Lewis Carroll Distant Reader</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
