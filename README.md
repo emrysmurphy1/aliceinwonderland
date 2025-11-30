@@ -1,50 +1,77 @@
-# Alice in Wonderland
+# Lewis Carroll: A Distant Reading
 
-A TypeScript Node.js project.
+An interactive web visualization exploring four works by Lewis Carroll through computational text analysis.
 
-## Getting Started
+**🌐 View Live:** [https://emrysmurphy1.github.io/aliceinwonderland/](https://emrysmurphy1.github.io/aliceinwonderland/)
 
-### Prerequisites
+## About
 
-- Node.js 20.x or higher
-- npm (comes with Node.js)
+This project performs distant reading analysis on four Lewis Carroll works:
+- **Alice's Adventures in Wonderland**
+- **Phantasmagoria and Other Poems**
+- **Rhyme? and Reason?**
+- **Feeding the Mind**
 
-### Installation
+### Analysis Features
 
-```bash
-npm install
-```
+- **Word Frequency Analysis** - Bag of words with stopword filtering
+- **Sentiment Analysis** - Polarity (negative to positive) and subjectivity scores
+- **Style Metrics** - Sentence length, vocabulary richness, lexical diversity
+- **Interactive Word Clouds** - Visual representation of word frequencies
+- **Comparative Analysis** - Side-by-side comparison across works
 
-### Development
+### Design
 
-```bash
-# Run in development mode with hot reload
-npm run dev
-
-# Build the project
-npm run build
-
-# Run tests
-npm test
-
-# Lint and format code
-npm run lint
-npm run format
-```
+Victorian/Alice in Wonderland themed interface featuring:
+- Vintage color palette (burgundy, forest green, gold)
+- Playing card suit decorations (♠ ♥ ♣ ♦)
+- Classic serif typography
+- Responsive, interactive design
 
 ## Project Structure
 
-- `src/` - Source TypeScript files
-- `tests/` - Test files
-- `dist/` - Compiled output (generated)
+```
+aliceinwonderland/
+├── tests/          # Original Lewis Carroll texts from Project Gutenberg
+├── analysis/       # Python scripts for text analysis
+│   ├── analyze.py      # Main analysis engine
+│   ├── preprocess.py   # Text preprocessing utilities
+│   └── requirements.txt
+└── docs/           # GitHub Pages site
+    ├── index.html      # Main web interface
+    ├── styles.css      # Victorian theme styling
+    ├── app.js          # Interactive visualization logic
+    └── data/
+        └── analysis.json  # Generated analysis data
+```
 
-## Scripts
+## Running Locally
 
-- `npm run build` - Compile TypeScript
-- `npm run dev` - Development mode with hot reload
-- `npm test` - Run tests
-- `npm run lint` - Lint code
-- `npm run format` - Format code
+### View the Visualization
+
+From the `docs/` directory:
+```bash
+python3 -m http.server 8000
+```
+Then open http://localhost:8000 in your browser.
+
+### Re-run the Analysis
+
+To regenerate the analysis data:
+```bash
+cd analysis
+pip install -r requirements.txt
+python3 analyze.py
+```
+
+This will process the text files and update `docs/data/analysis.json`.
+
+## Technologies
+
+- **Analysis:** Python with NLTK, TextBlob, and NumPy
+- **Visualization:** Vanilla JavaScript with Canvas API
+- **Styling:** CSS with Victorian aesthetic
+- **Deployment:** GitHub Pages
 
 ## License
 
