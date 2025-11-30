@@ -301,6 +301,114 @@ body {
     background: linear-gradient(90deg, var(--deep-burgundy), var(--gold));
 }
 
+/* Advanced Metrics */
+.advanced-metrics-section {
+    margin-bottom: 40px;
+}
+
+.advanced-metrics-section h3 {
+    font-size: 1.8em;
+    color: var(--deep-burgundy);
+    margin-bottom: 20px;
+}
+
+.advanced-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+}
+
+.advanced-card {
+    background: var(--vintage-paper);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.advanced-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.advanced-label {
+    font-size: 0.85em;
+    color: var(--forest-green);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.advanced-value {
+    font-size: 2em;
+    color: var(--card-red);
+    font-weight: bold;
+}
+
+/* Common Phrases */
+.phrases-section {
+    margin-bottom: 40px;
+}
+
+.phrases-section h3 {
+    font-size: 1.8em;
+    color: var(--deep-burgundy);
+    margin-bottom: 20px;
+}
+
+.phrases-display {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.phrases-column h4 {
+    font-size: 1.2em;
+    color: var(--forest-green);
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 8px;
+}
+
+.phrase-item {
+    background: var(--vintage-paper);
+    border-left: 4px solid var(--card-red);
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.phrase-item:hover {
+    background: var(--gold);
+    color: white;
+    border-left-color: var(--deep-burgundy);
+}
+
+.phrase-trigram {
+    border-left-color: var(--forest-green);
+}
+
+.phrase-text {
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    flex: 1;
+}
+
+.phrase-count {
+    font-weight: bold;
+    color: var(--deep-burgundy);
+    margin-left: 15px;
+}
+
+.phrase-item:hover .phrase-count {
+    color: white;
+}
+
 /* Top Words */
 .top-words-section h3 {
     font-size: 1.8em;

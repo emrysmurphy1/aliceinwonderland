@@ -117,7 +117,40 @@
         "avg_sentence_length": 15.09,
         "avg_word_length": 4.11,
         "lexical_diversity": 0.1663,
-        "vocabulary_richness": 16.63
+        "vocabulary_richness": 16.63,
+        "word_length_dist": {
+          "short": 66.6,
+          "medium": 26.9,
+          "long": 6.4
+        }
+      },
+      "advanced": {
+        "exclamations": 176,
+        "questions": 70,
+        "dashes": 71,
+        "dialogue_percentage": 24.0,
+        "sentence_length_variation": 12.77,
+        "common_phrases": {
+          "bigrams": {
+            "said the": 61,
+            "in a": 45,
+            "of the": 44,
+            "in the": 35,
+            "and the": 33,
+            "she had": 28,
+            "it was": 27,
+            "she was": 26,
+            "as she": 26,
+            "a little": 26
+          },
+          "trigrams": {
+            "out of the": 8,
+            "one of the": 7,
+            "the white rabbit": 7,
+            "said the king.": 7,
+            "as well as": 6
+          }
+        }
       }
     },
     {
@@ -237,7 +270,40 @@
         "avg_sentence_length": 19.04,
         "avg_word_length": 4.19,
         "lexical_diversity": 0.2579,
-        "vocabulary_richness": 25.79
+        "vocabulary_richness": 25.79,
+        "word_length_dist": {
+          "short": 64.6,
+          "medium": 27.6,
+          "long": 7.8
+        }
+      },
+      "advanced": {
+        "exclamations": 205,
+        "questions": 102,
+        "dashes": 195,
+        "dialogue_percentage": 0.0,
+        "sentence_length_variation": 14.86,
+        "common_phrases": {
+          "bigrams": {
+            "in the": 36,
+            "of the": 26,
+            "if you": 19,
+            "with a": 18,
+            "to the": 18,
+            "on the": 16,
+            "in a": 16,
+            "of a": 14,
+            "a little": 13,
+            "to be": 13
+          },
+          "trigrams": {
+            "and he was": 5,
+            "in such a": 4,
+            "said i, to": 4,
+            "i have a": 4,
+            "whilk i sent": 4
+          }
+        }
       }
     },
     {
@@ -357,7 +423,40 @@
         "avg_sentence_length": 17.86,
         "avg_word_length": 4.24,
         "lexical_diversity": 0.2256,
-        "vocabulary_richness": 22.56
+        "vocabulary_richness": 22.56,
+        "word_length_dist": {
+          "short": 64.3,
+          "medium": 27.0,
+          "long": 8.7
+        }
+      },
+      "advanced": {
+        "exclamations": 283,
+        "questions": 123,
+        "dashes": 281,
+        "dialogue_percentage": 32.37,
+        "sentence_length_variation": 15.3,
+        "common_phrases": {
+          "bigrams": {
+            "of the": 52,
+            "in the": 45,
+            "to the": 37,
+            "with a": 35,
+            "and the": 30,
+            "on the": 28,
+            "it with": 28,
+            "in a": 27,
+            "the bellman": 25,
+            "but the": 22
+          },
+          "trigrams": {
+            "they sought it": 8,
+            "sought it with": 8,
+            "it with forks": 7,
+            "with forks and": 7,
+            "you will say": 6
+          }
+        }
       }
     },
     {
@@ -477,7 +576,40 @@
         "avg_sentence_length": 19.86,
         "avg_word_length": 4.4,
         "lexical_diversity": 0.3585,
-        "vocabulary_richness": 35.85
+        "vocabulary_richness": 35.85,
+        "word_length_dist": {
+          "short": 63.0,
+          "medium": 25.9,
+          "long": 11.2
+        }
+      },
+      "advanced": {
+        "exclamations": 21,
+        "questions": 17,
+        "dashes": 24,
+        "dialogue_percentage": 38.53,
+        "sentence_length_variation": 18.85,
+        "common_phrases": {
+          "bigrams": {
+            "of the": 22,
+            "the mind": 10,
+            "to the": 9,
+            "for the": 9,
+            "in the": 7,
+            "on the": 6,
+            "the last": 6,
+            "with the": 5,
+            "go on": 5,
+            "one of": 5
+          },
+          "trigrams": {
+            "feeding the mind": 3,
+            "a quart of": 3,
+            "by r. l.": 2,
+            "r. l. stevenson.": 2,
+            "to begin a": 2
+          }
+        }
       }
     }
   ],
@@ -513,7 +645,12 @@
         "avg_sentence_length": 15.09,
         "avg_word_length": 4.11,
         "lexical_diversity": 0.1663,
-        "vocabulary_richness": 16.63
+        "vocabulary_richness": 16.63,
+        "word_length_dist": {
+          "short": 66.6,
+          "medium": 26.9,
+          "long": 6.4
+        }
       },
       "phantasmagoria": {
         "title": "Phantasmagoria",
@@ -523,7 +660,12 @@
         "avg_sentence_length": 19.04,
         "avg_word_length": 4.19,
         "lexical_diversity": 0.2579,
-        "vocabulary_richness": 25.79
+        "vocabulary_richness": 25.79,
+        "word_length_dist": {
+          "short": 64.6,
+          "medium": 27.6,
+          "long": 7.8
+        }
       },
       "rhyme": {
         "title": "Rhyme and Reason",
@@ -533,7 +675,12 @@
         "avg_sentence_length": 17.86,
         "avg_word_length": 4.24,
         "lexical_diversity": 0.2256,
-        "vocabulary_richness": 22.56
+        "vocabulary_richness": 22.56,
+        "word_length_dist": {
+          "short": 64.3,
+          "medium": 27.0,
+          "long": 8.7
+        }
       },
       "feeding": {
         "title": "Feeding the Mind",
@@ -543,29 +690,98 @@
         "avg_sentence_length": 19.86,
         "avg_word_length": 4.4,
         "lexical_diversity": 0.3585,
-        "vocabulary_richness": 35.85
+        "vocabulary_richness": 35.85,
+        "word_length_dist": {
+          "short": 63.0,
+          "medium": 25.9,
+          "long": 11.2
+        }
       }
     },
-    "word_overlap": {},
-    "common_top_words": [
-      "think",
-      "one",
-      "first",
-      "way",
-      "last",
-      "well",
-      "three",
-      "like",
-      "say",
-      "much",
-      "know",
-      "take",
-      "two",
-      "would",
-      "thing",
-      "little",
-      "could"
-    ]
+    "advanced_comparison": {
+      "alice": {
+        "title": "Alice in Wonderland",
+        "exclamations": 176,
+        "questions": 70,
+        "dashes": 71,
+        "dialogue_percentage": 24.0,
+        "sentence_length_variation": 12.77
+      },
+      "phantasmagoria": {
+        "title": "Phantasmagoria",
+        "exclamations": 205,
+        "questions": 102,
+        "dashes": 195,
+        "dialogue_percentage": 0.0,
+        "sentence_length_variation": 14.86
+      },
+      "rhyme": {
+        "title": "Rhyme and Reason",
+        "exclamations": 283,
+        "questions": 123,
+        "dashes": 281,
+        "dialogue_percentage": 32.37,
+        "sentence_length_variation": 15.3
+      },
+      "feeding": {
+        "title": "Feeding the Mind",
+        "exclamations": 21,
+        "questions": 17,
+        "dashes": 24,
+        "dialogue_percentage": 38.53,
+        "sentence_length_variation": 18.85
+      }
+    },
+    "vocabulary_analysis": {
+      "common_words_count": 17,
+      "common_words": [
+        "first",
+        "much",
+        "way",
+        "one",
+        "last",
+        "know",
+        "say",
+        "would",
+        "could",
+        "little",
+        "three",
+        "thing",
+        "two",
+        "well",
+        "take",
+        "like",
+        "think"
+      ],
+      "unique_words_per_book": {
+        "alice": 45,
+        "phantasmagoria": 11,
+        "rhyme": 11,
+        "feeding": 63
+      },
+      "overlap_matrix": {
+        "alice": {
+          "phantasmagoria": 46.0,
+          "rhyme": 44.0,
+          "feeding": 22.0
+        },
+        "phantasmagoria": {
+          "alice": 46.0,
+          "rhyme": 79.0,
+          "feeding": 30.0
+        },
+        "rhyme": {
+          "alice": 44.0,
+          "phantasmagoria": 79.0,
+          "feeding": 30.0
+        },
+        "feeding": {
+          "alice": 22.0,
+          "phantasmagoria": 30.0,
+          "rhyme": 30.0
+        }
+      }
+    }
   },
   "metadata": {
     "total_books": 4,

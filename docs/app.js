@@ -145,6 +145,76 @@ function renderOverview(book) {
         </div>
     `;
 
+    // Render advanced metrics
+    const advancedMetrics = document.getElementById('advancedMetrics');
+    advancedMetrics.innerHTML = `
+        <div class="advanced-grid">
+            <div class="advanced-card">
+                <div class="advanced-label">Exclamation Marks</div>
+                <div class="advanced-value">${book.advanced.exclamations}</div>
+            </div>
+            <div class="advanced-card">
+                <div class="advanced-label">Question Marks</div>
+                <div class="advanced-value">${book.advanced.questions}</div>
+            </div>
+            <div class="advanced-card">
+                <div class="advanced-label">Dashes</div>
+                <div class="advanced-value">${book.advanced.dashes}</div>
+            </div>
+            <div class="advanced-card">
+                <div class="advanced-label">Dialogue %</div>
+                <div class="advanced-value">${book.advanced.dialogue_percentage}%</div>
+            </div>
+            <div class="advanced-card">
+                <div class="advanced-label">Sentence Variation</div>
+                <div class="advanced-value">${book.advanced.sentence_length_variation}</div>
+            </div>
+            <div class="advanced-card">
+                <div class="advanced-label">Short Words</div>
+                <div class="advanced-value">${book.style.word_length_dist.short}%</div>
+            </div>
+            <div class="advanced-card">
+                <div class="advanced-label">Medium Words</div>
+                <div class="advanced-value">${book.style.word_length_dist.medium}%</div>
+            </div>
+            <div class="advanced-card">
+                <div class="advanced-label">Long Words</div>
+                <div class="advanced-value">${book.style.word_length_dist.long}%</div>
+            </div>
+        </div>
+    `;
+
+    // Render common phrases
+    const commonPhrases = document.getElementById('commonPhrases');
+    const bigramsHTML = Object.entries(book.advanced.common_phrases.bigrams)
+        .slice(0, 10)
+        .map(([phrase, count]) => `
+            <div class="phrase-item">
+                <span class="phrase-text">"${phrase}"</span>
+                <span class="phrase-count">${count}×</span>
+            </div>
+        `).join('');
+
+    const trigramsHTML = Object.entries(book.advanced.common_phrases.trigrams)
+        .slice(0, 5)
+        .map(([phrase, count]) => `
+            <div class="phrase-item phrase-trigram">
+                <span class="phrase-text">"${phrase}"</span>
+                <span class="phrase-count">${count}×</span>
+            </div>
+        `).join('');
+
+    commonPhrases.innerHTML = `
+        <div class="phrases-column">
+            <h4>Most Common Two-Word Phrases</h4>
+            ${bigramsHTML}
+        </div>
+        <div class="phrases-column">
+            <h4>Most Common Three-Word Phrases</h4>
+            ${trigramsHTML}
+        </div>
+    `;
+
     // Render top words
     const topWords = document.getElementById('topWords');
     const topWordsArray = Object.entries(book.word_frequencies)
@@ -285,6 +355,62 @@ function updateComparison() {
         </tr>`;
     });
     html += '</table></div>';
+
+    // Add advanced metrics comparison
+    html += '<div class="comparison-table"><h3>Literary Patterns Comparison</h3><table>';
+    html += '<tr><th>Metric</th>';
+    booksToCompare.forEach(book => {
+        html += `<th>${book.short_title}</th>`;
+    });
+    html += '</tr>';
+
+    const advancedMetrics = [
+        { key: 'exclamations', label: 'Exclamation Marks' },
+        { key: 'questions', label: 'Question Marks' },
+        { key: 'dashes', label: 'Dashes' },
+        { key: 'dialogue_percentage', label: 'Dialogue %' },
+        { key: 'sentence_length_variation', label: 'Sentence Variation' }
+    ];
+
+    advancedMetrics.forEach(metric => {
+        html += `<tr><td><strong>${metric.label}</strong></td>`;
+        booksToCompare.forEach(book => {
+            const value = book.advanced[metric.key];
+            html += `<td>${typeof value === 'number' ? value.toFixed(2) : value}</td>`;
+        });
+        html += '</tr>';
+    });
+
+    html += '</table></div>';
+
+    // Add vocabulary overlap analysis
+    if (selectedBooks.size > 1) {
+        html += '<div class="comparison-table"><h3>Vocabulary Analysis</h3>';
+
+        // Unique words per book
+        html += '<table><tr><th>Book</th><th>Unique Words (not in other selected books)</th></tr>';
+        booksToCompare.forEach(book => {
+            const uniqueCount = analysisData.comparison.vocabulary_analysis.unique_words_per_book[book.id];
+            html += `<tr><td><strong>${book.short_title}</strong></td><td>${uniqueCount}</td></tr>`;
+        });
+        html += '</table>';
+
+        // Vocabulary overlap matrix
+        if (selectedBooks.size === 2) {
+            const book1 = booksToCompare[0];
+            const book2 = booksToCompare[1];
+            const overlap1 = analysisData.comparison.vocabulary_analysis.overlap_matrix[book1.id][book2.id];
+            const overlap2 = analysisData.comparison.vocabulary_analysis.overlap_matrix[book2.id][book1.id];
+
+            html += `<p style="margin-top: 20px; padding: 15px; background: var(--vintage-paper); border-radius: 5px;">
+                <strong>Vocabulary Overlap:</strong><br>
+                ${overlap1.toFixed(1)}% of "${book1.short_title}" words appear in "${book2.short_title}"<br>
+                ${overlap2.toFixed(1)}% of "${book2.short_title}" words appear in "${book1.short_title}"
+            </p>`;
+        }
+
+        html += '</div>';
+    }
 
     document.getElementById('comparisonDisplay').innerHTML = html;
 }

@@ -65,6 +65,52 @@ def get_bag_of_words(words: List[str], top_n: int = 100) -> Dict[str, int]:
     return dict(word_counts.most_common(top_n))
 
 
+def calculate_advanced_metrics(text: str, cleaned_text: str) -> Dict[str, Any]:
+    """Calculate advanced literary metrics."""
+    import re
+
+    # Punctuation patterns
+    exclamations = len(re.findall(r'!', text))
+    questions = len(re.findall(r'\?', text))
+    dashes = len(re.findall(r'—|--', text))
+
+    # Dialogue detection (text in quotes)
+    dialogue_matches = re.findall(r'"[^"]*"', text)
+    dialogue_words = sum(len(d.split()) for d in dialogue_matches)
+    total_words_raw = len(text.split())
+    dialogue_ratio = (dialogue_words / total_words_raw * 100) if total_words_raw > 0 else 0
+
+    # Sentence length variation (standard deviation)
+    sentences = re.split(r'[.!?]+', cleaned_text)
+    sentence_lengths = [len(s.split()) for s in sentences if s.strip()]
+    if sentence_lengths:
+        avg_len = sum(sentence_lengths) / len(sentence_lengths)
+        variance = sum((l - avg_len) ** 2 for l in sentence_lengths) / len(sentence_lengths)
+        std_dev = variance ** 0.5
+    else:
+        std_dev = 0
+
+    # Common repeated phrases (2-3 words)
+    words = cleaned_text.lower().split()
+    bigrams = [f"{words[i]} {words[i+1]}" for i in range(len(words)-1)]
+    trigrams = [f"{words[i]} {words[i+1]} {words[i+2]}" for i in range(len(words)-2)]
+
+    common_bigrams = Counter(bigrams).most_common(10)
+    common_trigrams = Counter(trigrams).most_common(5)
+
+    return {
+        'exclamations': exclamations,
+        'questions': questions,
+        'dashes': dashes,
+        'dialogue_percentage': round(dialogue_ratio, 2),
+        'sentence_length_variation': round(std_dev, 2),
+        'common_phrases': {
+            'bigrams': dict(common_bigrams),
+            'trigrams': dict(common_trigrams)
+        }
+    }
+
+
 def calculate_style_metrics(text: str, sentences: List[str], words: List[str]) -> Dict[str, Any]:
     """Calculate various style metrics."""
     total_words = len(words)
@@ -76,6 +122,12 @@ def calculate_style_metrics(text: str, sentences: List[str], words: List[str]) -
     avg_word_length = sum(len(w) for w in words) / total_words if total_words > 0 else 0
     lexical_diversity = unique_words / total_words if total_words > 0 else 0
 
+    # Word length distribution
+    word_lengths = [len(w) for w in words]
+    short_words = sum(1 for l in word_lengths if l <= 4)
+    medium_words = sum(1 for l in word_lengths if 5 <= l <= 7)
+    long_words = sum(1 for l in word_lengths if l > 7)
+
     return {
         'total_words': total_words,
         'unique_words': unique_words,
@@ -83,7 +135,12 @@ def calculate_style_metrics(text: str, sentences: List[str], words: List[str]) -
         'avg_sentence_length': round(avg_sentence_length, 2),
         'avg_word_length': round(avg_word_length, 2),
         'lexical_diversity': round(lexical_diversity, 4),
-        'vocabulary_richness': round(lexical_diversity * 100, 2)  # As percentage
+        'vocabulary_richness': round(lexical_diversity * 100, 2),
+        'word_length_dist': {
+            'short': round(short_words / total_words * 100, 1) if total_words > 0 else 0,
+            'medium': round(medium_words / total_words * 100, 1) if total_words > 0 else 0,
+            'long': round(long_words / total_words * 100, 1) if total_words > 0 else 0
+        }
     }
 
 
@@ -98,6 +155,7 @@ def analyze_book(filepath: str, metadata: Dict[str, str]) -> Dict[str, Any]:
     sentiment = get_sentiment(cleaned_text)
     bag_of_words = get_bag_of_words(words, top_n=100)
     style_metrics = calculate_style_metrics(cleaned_text, sentences, words)
+    advanced_metrics = calculate_advanced_metrics(raw_text, cleaned_text)
 
     return {
         'id': metadata['id'],
@@ -105,7 +163,8 @@ def analyze_book(filepath: str, metadata: Dict[str, str]) -> Dict[str, Any]:
         'short_title': metadata['short_title'],
         'sentiment': sentiment,
         'word_frequencies': bag_of_words,
-        'style': style_metrics
+        'style': style_metrics,
+        'advanced': advanced_metrics
     }
 
 
@@ -114,7 +173,8 @@ def generate_comparison_data(analyses: List[Dict[str, Any]]) -> Dict[str, Any]:
     comparison = {
         'sentiment_comparison': {},
         'style_comparison': {},
-        'word_overlap': {}
+        'advanced_comparison': {},
+        'vocabulary_analysis': {}
     }
 
     # Compare sentiments
@@ -134,10 +194,47 @@ def generate_comparison_data(analyses: List[Dict[str, Any]]) -> Dict[str, Any]:
             **analysis['style']
         }
 
-    # Find common words across books
-    all_words = [set(analysis['word_frequencies'].keys()) for analysis in analyses]
-    common_words = set.intersection(*all_words) if all_words else set()
-    comparison['common_top_words'] = list(common_words)
+    # Compare advanced metrics
+    for analysis in analyses:
+        book_id = analysis['id']
+        comparison['advanced_comparison'][book_id] = {
+            'title': analysis['short_title'],
+            **{k: v for k, v in analysis['advanced'].items() if k != 'common_phrases'}
+        }
+
+    # Vocabulary analysis
+    all_word_sets = {analysis['id']: set(analysis['word_frequencies'].keys())
+                     for analysis in analyses}
+
+    # Find common words across all books
+    common_words = set.intersection(*all_word_sets.values()) if all_word_sets else set()
+
+    # Find unique words per book (words that appear in only one book)
+    unique_per_book = {}
+    for book_id, words in all_word_sets.items():
+        other_words = set()
+        for other_id, other_word_set in all_word_sets.items():
+            if other_id != book_id:
+                other_words.update(other_word_set)
+        unique_words = words - other_words
+        unique_per_book[book_id] = len(unique_words)
+
+    # Calculate overlap percentages
+    overlap_matrix = {}
+    for id1, words1 in all_word_sets.items():
+        overlap_matrix[id1] = {}
+        for id2, words2 in all_word_sets.items():
+            if id1 != id2:
+                overlap = len(words1 & words2)
+                overlap_pct = (overlap / len(words1) * 100) if len(words1) > 0 else 0
+                overlap_matrix[id1][id2] = round(overlap_pct, 1)
+
+    comparison['vocabulary_analysis'] = {
+        'common_words_count': len(common_words),
+        'common_words': list(common_words)[:20],  # Top 20 common words
+        'unique_words_per_book': unique_per_book,
+        'overlap_matrix': overlap_matrix
+    }
 
     return comparison
 
